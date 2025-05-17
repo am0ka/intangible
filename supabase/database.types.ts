@@ -319,6 +319,7 @@ export type Database = {
           id: string
           last_used_class: string | null
           last_used_role: string
+          role: string
           server_name: string
           updated_at: string
         }
@@ -329,6 +330,7 @@ export type Database = {
           id?: string
           last_used_class?: string | null
           last_used_role: string
+          role?: string
           server_name: string
           updated_at?: string
         }
@@ -339,6 +341,7 @@ export type Database = {
           id?: string
           last_used_class?: string | null
           last_used_role?: string
+          role?: string
           server_name?: string
           updated_at?: string
         }
