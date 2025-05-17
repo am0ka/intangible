@@ -33,12 +33,14 @@ export const updateUserData = async (userData: {
   global_name: string
   server_name: string
   last_used_role: 'tank' | 'dps' | 'heal'
+  role: 'admin' | 'user'
 }) => {
   const insertData: UserInsert = {
     discord_id: userData.discord_id,
     global_name: userData.global_name,
     server_name: userData.server_name,
-    last_used_role: userData.last_used_role
+    last_used_role: userData.last_used_role,
+    role: userData.role
   }
 
   const { error } = await supabase

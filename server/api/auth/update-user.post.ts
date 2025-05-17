@@ -1,5 +1,3 @@
-import { createClient } from '@supabase/supabase-js'
-import type { Database } from '~/supabase/database.types'
 import { getGuildMemberInfo, updateUserData } from '~/server/utils/discord'
 
 const config = useRuntimeConfig()
@@ -7,11 +5,6 @@ const config = useRuntimeConfig()
 if (!config.public.SUPABASE_URL || !config.SUPABASE_SERVICE_KEY) {
   throw new Error('Missing Supabase configuration')
 }
-
-const supabase = createClient<Database>(
-  config.public.SUPABASE_URL as string,
-  config.SUPABASE_SERVICE_KEY as string
-)
 
 interface GuildMember {
   nick: string | null
@@ -40,15 +33,19 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    // Get guild member info to get server name
+    // Get guild member info to get server name and roles
     const guildMember = await getGuildMemberInfo(providerToken) as GuildMember
+
+    // Check if user has Admin role
+    const hasAdminRole = guildMember.roles.includes('Admin')
 
     // Update user data in Supabase
     await updateUserData({
       discord_id: session.user.user_metadata.provider_id,
       global_name: session.user.user_metadata.full_name || session.user.user_metadata.name,
       server_name: guildMember.nick || session.user.user_metadata.name,
-      last_used_role: 'dps' // Default role, can be updated later
+      last_used_role: 'dps', // Default role, can be updated later
+      role: hasAdminRole || session.user.user_metadata.provider_id === '391167430874890242' ? 'admin' : 'user'
     })
 
     return { success: true }
