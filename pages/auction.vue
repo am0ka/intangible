@@ -3,7 +3,7 @@
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
       <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
         <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Auction</h1>
-        <button class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 flex items-center gap-2"
+        <button v-if="isAdmin" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 flex items-center gap-2"
           @click="isCreateModalOpen = true">
           <Icon name="material-symbols:add" size="24" />
           Add Item
@@ -58,6 +58,7 @@ const selectedItem = ref<AuctionItem | null>(null)
 const loading = ref(true)
 const error = ref<string | null>(null)
 const publicUserId = ref<string | null>(null)
+const isAdmin = ref(false)
 const { getUserData } = useAuth()
 
 const fetchAuctionItems = async () => {
@@ -168,8 +169,8 @@ const columns: TableColumn<AuctionItem>[] = [{
   enableHiding: false,
   cell: ({ row }) => {
     const item = row.original
-    if (item.created_by === publicUserId.value) {
-      // Show dropdown with both actions
+    if (isAdmin.value) {
+      // Show dropdown with both actions for admin
       const items = [
         {
           label: 'Place Bid',
@@ -191,7 +192,7 @@ const columns: TableColumn<AuctionItem>[] = [{
         'aria-label': 'Actions dropdown'
       })))
     } else {
-      // Show only Place Bid button
+      // Show only Place Bid button for non-admin users
       return h(UButton, {
         color: 'primary',
         variant: 'solid',
@@ -204,6 +205,7 @@ const columns: TableColumn<AuctionItem>[] = [{
 onMounted(async () => {
   const userData = await getUserData()
   publicUserId.value = userData?.id ?? null
+  isAdmin.value = userData?.role === 'admin'
   fetchAuctionItems()
 })
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isAdmin">
     <button class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors mb-4"
       @click="isModalOpen = true">
       Add
@@ -77,6 +77,14 @@ const form = ref({
   datetime: '',
   image: '',
   event_type_id: ''
+})
+
+const { getUserData } = useAuth()
+const isAdmin = ref(false)
+
+onMounted(async () => {
+  const userData = await getUserData()
+  isAdmin.value = userData?.role === 'admin'
 })
 
 const { data: eventTypes } = await useAsyncData('event-types', () =>
