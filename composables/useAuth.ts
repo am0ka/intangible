@@ -11,7 +11,9 @@ export const useAuth = () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'discord',
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
+        redirectTo: process.env.NODE_ENV === 'production' 
+          ? 'https://intangible.sarsen.dev/auth/callback'
+          : `${window.location.origin}/auth/callback`,
         scopes: 'identify email guilds guilds.members.read'
       }
     })
