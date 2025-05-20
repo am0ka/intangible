@@ -69,7 +69,3 @@ export const getUserData = async (authId: string) => {
 
   return data
 }
-
-export async function getDiscordUser(accessToken: string) {
-  // ... existing code ...
-}

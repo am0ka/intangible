@@ -40,6 +40,10 @@
 import { CalendarDate } from '@internationalized/date'
 import type { Event } from '~/types/event'
 
+definePageMeta({
+  middleware: ['auth']
+})
+
 const { data: events } = await useAsyncData<Event[]>('events', () =>
   $fetch('/api/events')
 )

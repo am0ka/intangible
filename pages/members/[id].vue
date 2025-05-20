@@ -2,6 +2,10 @@
 import { h } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
 
+definePageMeta({
+  middleware: ['auth']
+})
+
 type Member = {
   id: string
   server_name: string

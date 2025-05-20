@@ -39,6 +39,10 @@ import { ref, onMounted, h, resolveComponent } from 'vue'
 import type { Database } from '~/supabase/database.types'
 import type { TableColumn } from '@nuxt/ui'
 
+definePageMeta({
+  middleware: ['auth']
+})
+
 useHead({
   script: [
     {

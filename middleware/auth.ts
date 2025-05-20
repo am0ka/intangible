@@ -1,13 +1,22 @@
-export default defineNuxtRouteMiddleware((to) => {
-  const user = useSupabaseUser()
+export default defineNuxtRouteMiddleware(async (to) => {
+  const publicPages = ['/']
+  const isPublicPage = publicPages.includes(to.path)
 
-  // If user is not logged in and trying to access a protected route
-  if (!user.value && to.path !== '/auth/login') {
-    return navigateTo('/auth/login')
+  // If it's a public page, allow access
+  if (isPublicPage) {
+    return
   }
 
-  // If user is logged in and trying to access login page
-  if (user.value && to.path === '/auth/login') {
+  // Check if user is authenticated using Supabase
+  const supabase = useSupabaseClient()
+  const { data: { session } } = await supabase.auth.getSession()
+
+  if (!session) {
+    // Show notification
+    const toast = useToast()
+    toast.error({ title: "Not authenticated", message: "To visit this page please log in", position: "bottomRight" })
+
+    // Redirect to home page if not authenticated
     return navigateTo('/')
   }
 }) 

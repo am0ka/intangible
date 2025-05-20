@@ -40,6 +40,10 @@ import { computed } from 'vue'
 
 const route = useRoute()
 
+definePageMeta({
+  middleware: ['auth']
+})
+
 const { data: event, pending, error } = await useAsyncData<Event>(
   `event-${route.params.slug}`,
   () => $fetch(`/api/events/${route.params.slug}`)

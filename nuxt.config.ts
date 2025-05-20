@@ -35,7 +35,8 @@ export default defineNuxtConfig({
     '@nuxt/scripts',
     '@nuxt/test-utils',
     '@nuxt/content',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    'nuxt-toast'
   ],
   vite: {
     plugins: [

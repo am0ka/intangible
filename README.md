@@ -20,14 +20,12 @@ A modern web application built with Nuxt 3, featuring event management, user aut
   - TypeScript for type safety
   - TailwindCSS for styling
   - Supabase for backend services
-  - MongoDB integration
   - Pinia for state management
 
 ## 📋 Prerequisites
 
 - Node.js (Latest LTS version recommended)
 - Yarn package manager (v4.9.1 or later)
-- MongoDB instance
 - Supabase account
 - Discord Developer account (for OAuth)
 
@@ -51,9 +49,6 @@ A modern web application built with Nuxt 3, featuring event management, user aut
    SUPABASE_URL=your_supabase_url
    SUPABASE_KEY=your_supabase_key
 
-   # MongoDB
-   MONGODB_URI=your_mongodb_uri
-
    # Discord OAuth
    DISCORD_CLIENT_ID=your_discord_client_id
    DISCORD_CLIENT_SECRET=your_discord_client_secret
@@ -67,7 +62,7 @@ Start the development server:
 yarn dev
 ```
 
-The application will be available at `http://localhost:3000`
+The application will be available at `https://intangible.sarsen.dev`
 
 ## 🏗️ Project Structure
 
@@ -122,7 +117,6 @@ TypeScript configuration is in `tsconfig.json`
 - TypeScript
 - TailwindCSS
 - Supabase
-- MongoDB
 - Pinia
 
 ### Development Dependencies

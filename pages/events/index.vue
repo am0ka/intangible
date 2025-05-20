@@ -25,6 +25,10 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  middleware: ['auth']
+})
+
 const { data: events, pending, error } = await useAsyncData('events', () =>
   $fetch('/api/events')
 )

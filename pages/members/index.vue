@@ -5,6 +5,9 @@ import type { TableColumn } from '@nuxt/ui'
 const UButton = resolveComponent('UButton')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
+definePageMeta({
+  middleware: ['auth']
+})
 
 type Member = {
   id: string
