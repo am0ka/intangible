@@ -65,8 +65,7 @@
 
 <script setup lang="ts">
 import type { Event } from '~/types/event'
-import type { Database } from '~/types/supabase'
-import { useSupabaseClient, useSupabaseUser, useToast } from '#imports'
+import type { Database } from '~/supabase/database.types'
 
 const props = defineProps<{ event: Event }>()
 
@@ -135,17 +134,17 @@ const handleParticipate = async () => {
 
     if (participationError) throw participationError
 
-    toast.add({
+    toast.success({
       title: 'Success',
-      description: 'You have successfully checked in for the event!',
-      color: 'success'
+      message: 'You have successfully checked in for the event!',
+      position: "bottomRight"
     })
   } catch (error) {
     console.error('Error checking in:', error)
-    toast.add({
+    toast.success({
       title: 'Error',
-      description: 'Failed to check in for the event. Please try again.',
-      color: 'error'
+      message: 'Failed to check in for the event. Please try again.',
+      position: "bottomRight"
     })
   }
 
@@ -176,17 +175,17 @@ const handleRefuse = async () => {
 
     if (participationError) throw participationError
 
-    toast.add({
+    toast.success({
       title: 'Success',
-      description: 'You have declined the event.',
-      color: 'success'
+      message: 'You have declined the event.',
+      position: "bottomRight"
     })
   } catch (error) {
     console.error('Error declining event:', error)
-    toast.add({
+    toast.success({
       title: 'Error',
-      description: 'Failed to decline the event. Please try again.',
-      color: 'error'
+      message: 'Failed to decline the event. Please try again.',
+      position: "bottomRight"
     })
   }
 
@@ -217,17 +216,17 @@ const handleMaybe = async () => {
 
     if (participationError) throw participationError
 
-    toast.add({
+    toast.success({
       title: 'Success',
-      description: 'You have marked yourself as maybe for the event.',
-      color: 'success'
+      message: 'You have marked yourself as maybe for the event.',
+      position: "bottomRight"
     })
   } catch (error) {
     console.error('Error marking maybe:', error)
-    toast.add({
+    toast.success({
       title: 'Error',
-      description: 'Failed to mark yourself as maybe. Please try again.',
-      color: 'error'
+      message: 'Failed to mark yourself as maybe. Please try again.',
+      position: "bottomRight"
     })
   }
 

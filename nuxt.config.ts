@@ -25,6 +25,9 @@ export default defineNuxtConfig({
   imports: {
     dirs: ["~/stores"]
   },
+  routeRules: {
+    '/.well-known/**': { static: true }
+  },
   modules: [
     '@nuxt/ui',
     '@nuxtjs/supabase',
@@ -38,6 +41,16 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-toast'
   ],
+  fonts: {
+    families: [
+      {
+        name: 'Inter',
+        provider: 'google',
+        preload: true,
+        display: 'swap'
+      }
+    ]
+  },
   vite: {
     plugins: [
       tailwindcss(),
